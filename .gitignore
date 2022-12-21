@@ -4,3 +4,4 @@ test.py
 .delta
 .idea/
 __pycache__/
+settings.py
