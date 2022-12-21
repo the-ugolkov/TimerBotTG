@@ -1,7 +1,7 @@
 import telebot
 
 from timer_def import *
-from settings import TOKEN
+from setting import TOKEN
 
 
 bot = telebot.TeleBot(TOKEN)
