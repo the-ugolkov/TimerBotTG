@@ -4,10 +4,8 @@ from datetime import datetime
 
 def dev_file(username):
     with open(f'users/{username}.txt', 'x'):
-        # f.write(f'{username}\n')
         pass
     with open(f'delta/{username}.txt', 'x'):
-        # f.write(f'{username}\n')
         pass
 
 
