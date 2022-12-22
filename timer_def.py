@@ -21,13 +21,6 @@ def ref_time(sec):
     m = sec // 60
     sec %= 60
     return "%02d:%02d:%02d" % (hour, m, sec)
-    # return "%02d:%02d" % (hour, m)
-    # if hour:
-    #     return 'Вы занимались %02d часов %02d минут' % (hour, min)
-    # elif min:
-    #     return 'Вы занимались %02d минут' % (min)
-    # else:
-    #     return f'Вы занимались {round(sec)} секунд'
 
 
 def start(username):
@@ -53,7 +46,6 @@ def delta_time(username):
         start_t = float((file[-2].split(' '))[-2])
         stop_t = float((file[-1].split(' '))[-2])
         res = stop_t - start_t
-    # delta = ref_time(res)
     with open(f'delta/{username}.txt', 'a') as file:
         date = (str(time_now())).split(' ')[0]
         file.write(f'{date} {res} \n')
