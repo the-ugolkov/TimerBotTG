@@ -3,10 +3,12 @@ from datetime import datetime
 
 
 def dev_file(username):
-    with open(f'users/{username}.txt', 'x') as f:
-        f.write(f'{username}\n')
-    with open(f'delta/{username}.txt', 'x') as f:
-        f.write(f'{username}\n')
+    with open(f'users/{username}.txt', 'x'):
+        # f.write(f'{username}\n')
+        pass
+    with open(f'delta/{username}.txt', 'x'):
+        # f.write(f'{username}\n')
+        pass
 
 
 def time_now():
@@ -19,6 +21,7 @@ def ref_time(sec):
     m = sec // 60
     sec %= 60
     return "%02d:%02d:%02d" % (hour, m, sec)
+    # return "%02d:%02d" % (hour, m)
     # if hour:
     #     return 'Вы занимались %02d часов %02d минут' % (hour, min)
     # elif min:
@@ -29,17 +32,18 @@ def ref_time(sec):
 
 def start(username):
     start_time = time.time()
-    s_time = time_now()
-    with open(f'users/{username}.txt', 'a') as f:
-        f.write(f'{s_time} start {start_time} \n')
+    s_time = ((str(time_now())).split(' ')[-1])[:5]
+    with open(f'users/{username}.txt', 'a') as file:
+        file.write(f'{s_time} start {start_time} \n')
     return s_time
 
 
 def stop(username):
     stop_time = time.time()
-    s_time = time_now()
-    with open(f'users/{username}.txt', 'a') as f:
-        f.write(f'{s_time} stop {stop_time} \n')
+    s_time = ((str(time_now())).split(' ')[-1])[:5]
+    with open(f'users/{username}.txt', 'a') as file:
+        file.write(f'{s_time} stop {stop_time} \n')
+    delta_time(username)
     return s_time
 
 
@@ -49,18 +53,26 @@ def delta_time(username):
         start_t = float((file[-2].split(' '))[-2])
         stop_t = float((file[-1].split(' '))[-2])
         res = stop_t - start_t
-    delta = ref_time(res)
-    with open(f'delta/{username}.txt', 'a') as f:
+    # delta = ref_time(res)
+    with open(f'delta/{username}.txt', 'a') as file:
         date = (str(time_now())).split(' ')[0]
-        f.write(f'{date} {res} \n')
+        file.write(f'{date} {res} \n')
+    return None
+
+
+def get_delta(username):
+    with open(f'delta/{username}.txt', 'r') as file:
+        file = file.readlines()
+        res = float((file[-1].split(' '))[-2])
+        delta = ref_time(res)
     return delta
 
 
 def sum_delta(username):
-    with open(f'delta/{username}.txt', 'r') as f:
-        file = f.readlines()
+    with open(f'delta/{username}.txt', 'r') as file:
+        file_sum = file.readlines()
         sum_deltas = 0
-        for line in file:
+        for line in file_sum:
             sum_deltas += float((line.split(' '))[-2])
         sum_res = ref_time(sum_deltas)
     return sum_res
