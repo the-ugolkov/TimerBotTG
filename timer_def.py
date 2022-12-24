@@ -16,9 +16,9 @@ def time_now():
 def ref_time(sec):
     hour = sec // 3600
     sec %= 3600
-    m = sec // 60
+    minute = sec // 60
     sec %= 60
-    return "%02d:%02d:%02d" % (hour, m, sec)
+    return "%02d:%02d:%02d" % (hour, minute, sec)
 
 
 def start(username):
